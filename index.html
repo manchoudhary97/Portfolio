@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Man Choudhary | AI Vision Portfolio</title>
+    <title>Mann's Portfolio | AI Vision</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* --- मूल CSS (पहले जैसा ही) --- */
         :root {
             --bg-dark: #050a14;
             --neon-cyan: #00f7ff;
@@ -19,312 +18,229 @@
             --cyber-border: 1px solid rgba(0, 247, 255, 0.3);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
 
         body {
             font-family: 'Rajdhani', sans-serif;
             background-color: var(--bg-dark);
             color: var(--text-light);
             overflow-x: hidden;
-            position: relative;
+            line-height: 1.5;
         }
 
-        #ai-canvas {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1; opacity: 0.8;
-        }
-
-        body::after {
-            content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0px, rgba(0, 0, 0, 0.1) 1px, transparent 1px, transparent 2px);
-            pointer-events: none; z-index: 1000; opacity: 0.3;
-        }
-
-        /* --- Typography --- */
-        h1, h2, h3, .logo {
-            font-family: 'Orbitron', sans-serif; letter-spacing: 2px; text-transform: uppercase;
-        }
-        h1 span { color: var(--neon-cyan); text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-blue); }
-        h2.section-title {
-            font-size: 2.5rem; text-align: center; margin-bottom: 60px; position: relative; display: inline-block; left: 50%; transform: translateX(-50%);
-        }
-        h2.section-title::before, h2.section-title::after { content: '[ '; color: var(--neon-blue); margin-right: 10px; }
-        h2.section-title::after { content: ' ]'; margin-left: 10px; }
-
-        /* --- Cyber Card --- */
-        .cyber-card {
-            background: rgba(5, 10, 20, 0.7); border: var(--cyber-border); padding: 30px; position: relative;
-            backdrop-filter: blur(5px); box-shadow: 0 0 20px rgba(0, 247, 255, 0.1); transition: 0.3s;
-        }
-        .cyber-card::before { content: ''; position: absolute; top: -2px; left: -2px; width: 20px; height: 20px; border-top: 2px solid var(--neon-cyan); border-left: 2px solid var(--neon-cyan); }
-        .cyber-card::after { content: ''; position: absolute; bottom: -2px; right: -2px; width: 20px; height: 20px; border-bottom: 2px solid var(--neon-cyan); border-right: 2px solid var(--neon-cyan); }
-        .cyber-card:hover { box-shadow: 0 0 30px rgba(0, 247, 255, 0.3); border-color: var(--neon-cyan); transform: translateY(-5px); }
+        #ai-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.6; }
 
         /* --- Navigation --- */
         nav {
-            display: flex; justify-content: space-between; align-items: center; padding: 20px 50px; position: fixed; width: 100%; top: 0; z-index: 100;
-            background: rgba(5, 10, 20, 0.8); border-bottom: 1px solid rgba(0, 247, 255, 0.2);
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 15px 5%; position: fixed; width: 100%; top: 0; z-index: 1000;
+            background: rgba(5, 10, 20, 0.9); border-bottom: 1px solid rgba(0, 247, 255, 0.2);
+            backdrop-filter: blur(10px);
         }
-        .logo { font-size: 1.5rem; color: var(--neon-cyan); }
-        nav ul { display: flex; list-style: none; }
-        nav ul li a {
-            text-decoration: none; color: var(--text-light); margin-left: 30px; font-weight: 700; font-size: 0.9rem; position: relative; transition: 0.3s;
-        }
-        nav ul li a:hover { color: var(--neon-cyan); text-shadow: 0 0 5px var(--neon-cyan); }
+        .logo { font-family: 'Orbitron'; font-size: 1.1rem; color: var(--neon-cyan); text-shadow: 0 0 10px var(--neon-cyan); }
 
-        /* --- Buttons --- */
-        .btn {
-            padding: 12px 30px; font-family: 'Orbitron', sans-serif; text-decoration: none; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; position: relative; transition: 0.5s; background: transparent; color: var(--neon-cyan); border: 2px solid var(--neon-cyan); overflow: hidden; z-index: 1; display: inline-block;
-        }
-        .btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent); transition: 0.5s; z-index: -1; }
-        .btn:hover::before { left: 100%; }
-        .btn:hover { box-shadow: 0 0 20px var(--neon-cyan); color: var(--bg-dark); background: var(--neon-cyan); }
-        .btn-group { display: flex; gap: 20px; margin-top: 30px; }
+        .nav-links { display: flex; list-style: none; gap: 25px; }
+        .nav-links a { text-decoration: none; color: var(--text-light); font-weight: 600; font-size: 0.8rem; font-family: 'Orbitron'; transition: 0.3s; }
+        .nav-links a:hover { color: var(--neon-cyan); }
 
-        /* --- Sections General --- */
-        section { padding: 120px 10%; min-height: 90vh; /* थोड़ा कम किया ताकि स्क्रॉल जल्दी ट्रिगर हो */ }
+        /* Mobile Menu Toggle */
+        .menu-btn { display: none; color: var(--neon-cyan); font-size: 1.5rem; cursor: pointer; }
 
-        /* Hero Section */
-        .hero { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
-        .hero p.mono-subtitle { font-family: 'Share Tech Mono', monospace; color: var(--neon-blue); margin-bottom: 10px; }
-        .hero h1 { font-size: 4rem; line-height: 1.1; margin-bottom: 20px; }
-        .hero .description { font-size: 1.2rem; max-width: 600px; color: var(--text-dim); }
-
-        /* Skills & Projects Utility */
-        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        .tech-list li { margin-bottom: 10px; display: flex; align-items: center; font-family: 'Share Tech Mono', monospace; }
-        .tech-list li i { color: var(--neon-cyan); margin-right: 10px; font-size: 0.8rem; }
-        .project-featured { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: center; }
-        .tech-stack span { font-family: 'Share Tech Mono', monospace; border: 1px solid var(--neon-blue); padding: 5px 10px; font-size: 0.8rem; color: var(--neon-blue); margin-right: 5px; margin-top: 10px; display: inline-block; }
-        .project-img-placeholder { height: 300px; background: repeating-linear-gradient(45deg, #0f172a, #0f172a 10px, #1e293b 10px, #1e293b 20px); border: var(--cyber-border); display: flex; justify-content: center; align-items: center; box-shadow: inset 0 0 30px rgba(0,247,255,0.2); }
+        /* --- Hero Section --- */
+        section { padding: 100px 8%; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+        .hero h1 { font-size: 3.5rem; font-family: 'Orbitron'; line-height: 1.1; margin-bottom: 20px; }
         
-        /* Contact & Footer */
-        .contact-link { display: flex; align-items: center; font-size: 1.2rem; color: var(--text-light); text-decoration: none; margin-bottom: 20px; font-family: 'Share Tech Mono', monospace; transition: 0.3s; }
-        .contact-link i { margin-right: 15px; color: var(--neon-purple); font-size: 1.5rem; }
-        .contact-link:hover { color: var(--neon-cyan); padding-left: 10px; }
-        footer { text-align: center; padding: 30px; background: #02040a; font-family: 'Share Tech Mono', monospace; color: var(--text-dim); font-size: 0.8rem; border-top: 1px solid rgba(0, 247, 255, 0.1); }
+        /* Typewriter Cursor */
+        #typewriter { color: var(--neon-cyan); border-right: 3px solid var(--neon-cyan); animation: blink 0.7s infinite; }
+        @keyframes blink { 50% { border-color: transparent; } }
 
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            nav { padding: 15px; } nav ul { display: none; } .hero h1 { font-size: 2.8rem; } .project-featured { grid-template-columns: 1fr; } section { padding: 80px 5%; }
+        .mono-subtitle { font-family: 'Share Tech Mono'; color: var(--neon-blue); margin-bottom: 10px; font-size: 0.9rem; }
+        .description { font-size: 1.1rem; max-width: 600px; color: var(--text-dim); }
+
+        /* --- Cyber Card --- */
+        .cyber-card {
+            background: rgba(5, 10, 20, 0.8); border: var(--cyber-border); padding: 25px; position: relative;
+            backdrop-filter: blur(5px); box-shadow: 0 0 15px rgba(0, 247, 255, 0.1); margin-bottom: 20px;
         }
+        .cyber-card::before { content: ''; position: absolute; top: -1px; left: -1px; width: 15px; height: 15px; border-top: 2px solid var(--neon-cyan); border-left: 2px solid var(--neon-cyan); }
+        .cyber-card::after { content: ''; position: absolute; bottom: -1px; right: -1px; width: 15px; height: 15px; border-bottom: 2px solid var(--neon-cyan); border-right: 2px solid var(--neon-cyan); }
+
+        /* --- Grid Layouts --- */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .project-featured { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 30px; }
+
+        .btn {
+            padding: 12px 25px; font-family: 'Orbitron'; text-decoration: none; color: var(--neon-cyan);
+            border: 2px solid var(--neon-cyan); font-weight: bold; font-size: 0.8rem; transition: 0.4s; display: inline-block;
+        }
+        .btn:hover { background: var(--neon-cyan); color: var(--bg-dark); box-shadow: 0 0 20px var(--neon-cyan); }
+        .btn-group { display: flex; gap: 15px; margin-top: 30px; flex-wrap: wrap; }
+
+        /* --- Scroll Animations --- */
+        .hyper-hidden { opacity: 0; transform: translateY(30px); filter: blur(10px); transition: all 0.8s ease; }
+        .hyper-visible { opacity: 1; transform: translateY(0); filter: blur(0); }
 
         /* =========================================
-           🆕 नया जोड़: खतरनाक स्क्रॉल एनिमेशन CSS
+            📱 MOBILE STYLES (Proper adjustments)
         ========================================= */
-        
-        /* यह क्लास उन तत्वों पर लगेगी जो अभी स्क्रीन पर नहीं आए हैं */
-        .hyper-hidden {
-            opacity: 0;
-            filter: blur(15px); /* शुरुआत में धुंधला */
-            transform: translateY(50px) scale(0.9); /* थोड़ा नीचे और छोटा */
-            transition: all 1s cubic-bezier(0.23, 1, 0.32, 1); /* स्मूथ रोबोटिक मूवमेंट */
+        @media (max-width: 768px) {
+            nav { padding: 15px 20px; }
+            .menu-btn { display: block; }
+            
+            /* Hide Menu on Mobile initially */
+            .nav-links {
+                position: fixed; top: 60px; right: -100%; width: 70%; height: 100vh;
+                background: rgba(5, 10, 20, 0.95); flex-direction: column; 
+                padding: 40px; transition: 0.4s; border-left: 1px solid var(--neon-cyan);
+            }
+            .nav-links.active { right: 0; }
+            
+            .hero h1 { font-size: 2.2rem; }
+            .section-title { font-size: 1.8rem !important; }
+            
+            .project-featured { grid-template-columns: 1fr; }
+            .project-img-placeholder { height: 200px; order: -1; } /* Image moves to top on mobile */
+            
+            section { padding: 80px 6% 40px 6%; }
         }
 
-        /* जब तत्व स्क्रीन पर आ जाएगा, JS यह क्लास जोड़ देगा */
-        .hyper-visible {
-            opacity: 1;
-            filter: blur(0);
-            transform: translateY(0) scale(1); /* अपनी असली जगह पर */
-        }
-        
-        /* अलग-अलग तत्वों के लिए थोड़ी देरी ताकि सब एक साथ न आएं */
-        .delay-200 { transition-delay: 0.2s; }
-        .delay-400 { transition-delay: 0.4s; }
-        .delay-600 { transition-delay: 0.6s; }
-
+        footer { text-align: center; padding: 30px; border-top: 1px solid rgba(0,247,255,0.1); font-family: 'Share Tech Mono'; font-size: 0.7rem; }
     </style>
 </head>
 <body>
+
     <canvas id="ai-canvas"></canvas>
 
     <nav>
-        <div class="logo">HERE MANN`S PORTFOLIO</div>
-        <ul>
-            <h3><li><a href="#home">^HOME</a></li></h3>
-            <h3><li><a href="#about">^ABOUT</a></li></h3>
-           <h3><li><a href="#skills">^SKILLS</a></li></h3>
-            <h3><li><a href="#projects">^PROJECTS</a></li></h3>
-            <h3><li><a href="#contact">^CONTACT</a></li></h3>
+        <div class="logo">MANN'S PORTFOLIO</div>
+        <div class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+        <ul class="nav-links">
+            <li><a href="#home" onclick="toggleMenu()">HOME</a></li>
+            <li><a href="#about" onclick="toggleMenu()">ABOUT</a></li>
+            <li><a href="#skills" onclick="toggleMenu()">SKILLS</a></li>
+            <li><a href="#projects" onclick="toggleMenu()">PROJECTS</a></li>
+            <li><a href="#contact" onclick="toggleMenu()">CONTACT</a></li>
         </ul>
     </nav>
 
     <section class="hero" id="home">
         <div class="hyper-animate">
-            <p class="mono-subtitle">Initializing System...</p>
-            <h1>Hi, I’m <span>Man Choudhary</span></h1>
-            <h3 style="color: var(--neon-blue); margin-bottom: 20px;">CSE B-Tech Student | Aspiring Developer</h3>
-            <p class="description">A passionate learner building intelligent, modern web applications. Focusing on integrating AI solutions with responsive frontend technologies.</p>
+            <p class="mono-subtitle">> INITIALIZING UPLINK...</p>
+            <h1>Hi, I'm <br><span id="typewriter"></span></h1>
+            <h3 style="color: var(--neon-blue); margin-bottom: 15px; font-family: 'Orbitron'; font-size: 1rem;">CSE STUDENT | DEVELOPER</h3>
+            <p class="description">Building intelligent, modern web applications with a focus on AI integration and futuristic UI.</p>
         </div>
-        <div class="btn-group hyper-animate delay-400">
-            <a href="#projects" class="btn">Explore Projects</a>
-            <a href="#contact" class="btn">Initiate Contact</a>
+        <div class="btn-group hyper-animate" style="transition-delay: 0.2s;">
+            <a href="#projects" class="btn">VIEW PROJECTS</a>
+            <a href="#contact" class="btn" style="border-color: var(--neon-blue); color: var(--neon-blue);">CONTACT</a>
         </div>
     </section>
 
     <section id="about">
-        <h2 class="section-title hyper-animate">ABOUT_ME</h2>
-        <div class="cyber-card hyper-animate delay-200">
-            <p style="font-size: 1.1rem; margin-bottom: 20px;">
-                I am a 1st year Computer Science B-Tech student at <strong style="color: var(--neon-cyan)">Acropolis Institute of Technology & Research</strong>.
+        <h2 class="section-title hyper-animate" style="font-family: 'Orbitron'; margin-bottom: 40px; color: var(--neon-cyan);">[ ABOUT_ME ]</h2>
+        <div class="cyber-card hyper-animate">
+            <p style="font-size: 1rem; color: var(--text-light);">
+                I am a 1st year Computer Science B-Tech student at <strong style="color: var(--neon-cyan)">Acropolis Institute (AITR)</strong>.
             </p>
+            <br>
             <p class="description">
-                My focus is on software development and modern web technologies. I have learned Python, Java, JavaScript, HTML, and CSS, applying them in academic and personal projects, including AI-based web applications. I believe in continuous learning and am actively exploring new tools and frameworks to grow as a professional.
+                Expertise in Python, Java, and JavaScript. Passionate about AI-based web applications and continuous learning in the software development field.
             </p>
         </div>
     </section>
 
     <section id="skills">
-        <h2 class="section-title hyper-animate">SYSTEM_SKILLS</h2>
+        <h2 class="section-title hyper-animate" style="font-family: 'Orbitron'; margin-bottom: 40px; color: var(--neon-cyan);">[ SYSTEM_SKILLS ]</h2>
         <div class="skills-grid">
             <div class="cyber-card hyper-animate">
-                <h3 style="color: var(--neon-purple); margin-bottom: 20px;">> Languages</h3>
-                <ul class="tech-list" style="list-style: none;">
-                    <li><i class="fas fa-chevron-right"></i> Python (OOP, Data Structures)</li>
-                    <li><i class="fas fa-chevron-right"></i> Java (Core, Exception Handling)</li>
-                    <li><i class="fas fa-chevron-right"></i> JavaScript (ES6+, DOM)</li>
-                </ul>
+                <h3 style="color: var(--neon-purple); font-size: 1rem; margin-bottom: 15px;">> LANGUAGES</h3>
+                <p class="description" style="font-size: 0.9rem;">Python, Java, JavaScript (ES6+)</p>
             </div>
-            <div class="cyber-card hyper-animate delay-200">
-                <h3 style="color: var(--neon-blue); margin-bottom: 20px;">> Web Core</h3>
-                <ul class="tech-list" style="list-style: none;">
-                    <li><i class="fas fa-chevron-right"></i> HTML5 Semantic</li>
-                    <li><i class="fas fa-chevron-right"></i> CSS3 (Flex/Grid)</li>
-                    <li><i class="fas fa-chevron-right"></i> Responsive Design</li>
-                </ul>
+            <div class="cyber-card hyper-animate" style="transition-delay: 0.2s;">
+                <h3 style="color: var(--neon-blue); font-size: 1rem; margin-bottom: 15px;">> WEB CORE</h3>
+                <p class="description" style="font-size: 0.9rem;">HTML5, CSS3 (Flex/Grid), Responsive Design</p>
             </div>
-            <div class="cyber-card hyper-animate delay-400">
-                <h3 style="color: var(--neon-cyan); margin-bottom: 20px;">> Tools & Ops</h3>
-                <ul class="tech-list" style="list-style: none;">
-                    <li><i class="fas fa-chevron-right"></i> Git & GitHub</li>
-                    <li><i class="fas fa-chevron-right"></i> VS Code</li>
-                    <li><i class="fas fa-chevron-right"></i> API Integration</li>
-                </ul>
+            <div class="cyber-card hyper-animate" style="transition-delay: 0.4s;">
+                <h3 style="color: var(--neon-cyan); font-size: 1rem; margin-bottom: 15px;">> TOOLS</h3>
+                <p class="description" style="font-size: 0.9rem;">Git, GitHub, VS Code, API Integration</p>
             </div>
         </div>
     </section>
 
     <section id="projects">
-        <h2 class="section-title hyper-animate">DEPLOYED_PROJECTS</h2>
-        
-        <div class="cyber-card project-featured hyper-animate delay-200">
+        <h2 class="section-title hyper-animate" style="font-family: 'Orbitron'; margin-bottom: 40px; color: var(--neon-cyan);">[ DEPLOYED_WORK ]</h2>
+        <div class="cyber-card project-featured hyper-animate">
             <div>
-                <p style="font-family: 'Share Tech Mono'; color: var(--neon-purple);">>>> FEATURED TARGET</p>
-                <h3 style="font-size: 2rem; margin: 10px 0;">AI Photo Enhancer</h3>
-                <p class="description">A web-based AI Photo Enhancer that improves image quality using artificial intelligence. Demonstrates ability to integrate AI-based solutions into real-world applications.</p>
-                
-                <div class="tech-stack">
-                    <span>HTML/CSS</span>
-                    <span>JavaScript</span>
-                    <span>AI API Integration</span>
-                </div>
-                <div class="btn-group" style="margin-top: 30px;">
-                    <a href="#" class="btn">Live Demo Link</a>
-                    <a href="#" class="btn"><i class="fab fa-github"></i> Source Code</a>
+                <p class="mono-subtitle">FEATURED_PROJECT</p>
+                <h3 style="font-family:'Orbitron'; margin: 10px 0;">AI Photo Enhancer</h3>
+                <p class="description" style="font-size: 0.9rem;">Using AI APIs to upscale and improve image quality directly in the browser.</p>
+                <div class="btn-group">
+                    <a href="#" class="btn" style="padding: 8px 15px;">DEMO</a>
                 </div>
             </div>
-            <div class="project-img-placeholder">
-                <i class="fas fa-robot fa-5x" style="color: var(--neon-cyan); opacity: 0.5;"></i>
-            </div>
-        </div>
-
-        <div class="skills-grid" style="margin-top: 50px;">
-            <div class="cyber-card hyper-animate">
-                <h4>Personal Portfolio Website</h4>
-                <p style="font-family:'Share Tech Mono'; font-size: 0.9rem; color: var(--text-dim);">Hyper-themed responsive design.</p>
-            </div>
-            <div class="cyber-card hyper-animate delay-200">
-                <h4>Weather Application</h4>
-                <p style="font-family:'Share Tech Mono'; font-size: 0.9rem; color: var(--text-dim);">API-based real-time data fetching.</p>
-            </div>
-            <div class="cyber-card hyper-animate delay-400">
-                <h4>Student Management System</h4>
-                <p style="font-family:'Share Tech Mono'; font-size: 0.9rem; color: var(--text-dim);">Java-based academic project.</p>
-            </div>
-         </div>
-    </section>
-
-    <section id="contact">
-        <h2 class="section-title hyper-animate">ESTABLISH_UPLINK</h2>
-        <div class="skills-grid">
-            <div class="hyper-animate delay-200">
-                 <h3 style="margin-bottom: 30px;">Status: Open for Opportunities</h3>
-                 <p class="description" style="margin-bottom: 40px;">I am currently open to learning opportunities, internships, and collaborations. Feel free to connect.</p>
-                 
-                 <a href="mailto:mrmanchoudhari@gmail.com" class="contact-link">
-                    <i class="fas fa-envelope"></i> mrmanchoudhari@gmail.com
-                 </a>
-                 <a href="https://linkedin.com/in/yourprofile" class="contact-link">
-                    <i class="fab fa-linkedin"></i> linkedin.com/in/yourprofile
-                 </a>
-                 <a href="https://github.com/yourusername" class="contact-link">
-                    <i class="fab fa-github"></i> github.com/yourusername
-                 </a>
-            </div>
-            <div class="cyber-card hyper-animate delay-400" style="display: flex; align-items: center; justify-content: center;">
-                 <i class="fas fa-satellite-dish fa-6x" style="color: var(--neon-blue); opacity: 0.2;"></i>
+            <div style="background: rgba(0,247,255,0.05); border: 1px dashed var(--neon-cyan); display: flex; align-items: center; justify-content: center; min-height: 150px;">
+                <i class="fas fa-brain fa-3x" style="color: var(--neon-cyan);"></i>
             </div>
         </div>
     </section>
 
-    <footer>
-        <p>© 2026 Man Choudhary. // System Status: Always Learning.</p>
+    <footer id="contact">
+        <p class="mono-subtitle">ESTABLISH_UPLINK</p>
+        <div style="margin: 20px 0;">
+            <a href="mailto:mrmanchoudhari@gmail.com" style="color: var(--neon-cyan); margin: 0 10px;"><i class="fas fa-envelope"></i></a>
+            <a href="#" style="color: var(--neon-cyan); margin: 0 10px;"><i class="fab fa-linkedin"></i></a>
+            <a href="#" style="color: var(--neon-cyan); margin: 0 10px;"><i class="fab fa-github"></i></a>
+        </div>
+        <p>© 2026 MAN CHOUDHARY // STATUS: ACTIVE</p>
     </footer>
 
-
     <script>
-        const canvas = document.getElementById('ai-canvas');
-        const ctx = canvas.getContext('2d');
-        let w, h, particles; let particleCount = 100; let mouse = { x: null, y: null, radius: 150 };
-        function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
-        function init() { resize(); particles = []; for (let i = 0; i < particleCount; i++) { particles.push(new Particle()); } }
-        class Particle {
-            constructor() { this.x = Math.random() * w; this.y = Math.random() * h; this.size = Math.random() * 2 + 0.5; this.speedX = Math.random() * 2 - 1; this.speedY = Math.random() * 2 - 1; this.color = '#00f7ff'; }
-            update() { this.x += this.speedX; this.y += this.speedY; if (this.x > w || this.x < 0) this.speedX *= -1; if (this.y > h || this.y < 0) this.speedY *= -1; let dx = mouse.x - this.x; let dy = mouse.y - this.y; let distance = Math.sqrt(dx * dx + dy * dy); if (distance < mouse.radius) { if (mouse.x < this.x && this.x < w - 10) this.x += 2; if (mouse.x > this.x && this.x > 10) this.x -= 2; if (mouse.y < this.y && this.y < h - 10) this.y += 2; if (mouse.y > this.y && this.y > 10) this.y -= 2; } }
-            draw() { ctx.fillStyle = this.color; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
+        // --- Navigation Toggle ---
+        function toggleMenu() {
+            const links = document.querySelector('.nav-links');
+            links.classList.toggle('active');
         }
-        function connect() { for (let a = 0; a < particles.length; a++) { for (let b = a; b < particles.length; b++) { let distance = ((particles[a].x - particles[b].x) * (particles[a].x - particles[b].x)) + ((particles[a].y - particles[b].y) * (particles[a].y - particles[b].y)); if (distance < (w * h) / 8000) { ctx.strokeStyle = 'rgba(0, 247, 255, ' + (1 - distance / 20000) + ')'; ctx.lineWidth = 0.5; ctx.beginPath(); ctx.moveTo(particles[a].x, particles[a].y); ctx.lineTo(particles[b].x, particles[b].y); ctx.stroke(); } } } }
-        function animate() { ctx.clearRect(0, 0, w, h); for (let i = 0; i < particles.length; i++) { particles[i].update(); particles[i].draw(); } connect(); requestAnimationFrame(animate); }
-        window.addEventListener('resize', resize); window.addEventListener('mousemove', (e) => { mouse.x = e.x; mouse.y = e.y; }); window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
-        init(); animate();
-    </script>
 
-    <script>
-        // 1. उन सभी तत्वों को चुनें जिन्हें एनिमेट करना है (जिन पर 'hyper-animate' क्लास है)
-        const animatedElements = document.querySelectorAll('.hyper-animate');
+        // --- Typewriter Effect ---
+        const text = "Man Choudhary";
+        let i = 0;
+        function typeWriter() {
+            if (i < text.length) {
+                document.getElementById("typewriter").innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 150);
+            }
+        }
 
-        // 2. उन सभी तत्वों को शुरू में 'hyper-hidden' क्लास दें ताकि वे गायब हो जाएं
-        animatedElements.forEach((el) => {
-            el.classList.add('hyper-hidden');
-        });
-
-        // 3. Intersection Observer सेटअप करें (यह देखेगा कि तत्व स्क्रीन पर कब आया)
+        // --- Intersection Observer for Scroll Animations ---
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                // अगर तत्व स्क्रीन पर दिख रहा है (isIntersecting)
+            entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    // उसे दिखने वाली क्लास दें
                     entry.target.classList.add('hyper-visible');
-                    entry.target.classList.remove('hyper-hidden');
-                    // एक बार एनिमेट होने के बाद, उसे देखना बंद करें (परफॉरमेंस के लिए अच्छा)
-                    observer.unobserve(entry.target);
                 }
             });
-        }, {
-            threshold: 0.15 // जब तत्व का 15% हिस्सा स्क्रीन पर आ जाए तब ट्रिगर करें
-        });
+        }, { threshold: 0.1 });
 
-        // 4. हर तत्व पर ऑब्जर्वर चालू करें
-        animatedElements.forEach((el) => {
+        document.querySelectorAll('.hyper-animate').forEach(el => {
+            el.classList.add('hyper-hidden');
             observer.observe(el);
         });
-    </script>
 
+        // --- Particle Background ---
+        const canvas = document.getElementById('ai-canvas');
+        const ctx = canvas.getContext('2d');
+        let w, h, particles = [];
+        function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
+        class P {
+            constructor() { this.x = Math.random()*w; this.y = Math.random()*h; this.vx = Math.random()*1-0.5; this.vy = Math.random()*1-0.5; }
+            update() { this.x+=this.vx; this.y+=this.vy; if(this.x<0||this.x>w)this.vx*=-1; if(this.y<0||this.y>h)this.vy*=-1; }
+            draw() { ctx.fillStyle='rgba(0,247,255,0.5)'; ctx.beginPath(); ctx.arc(this.x,this.y,1,0,Math.PI*2); ctx.fill(); }
+        }
+        function init() { resize(); for(let i=0; i<60; i++) particles.push(new P()); }
+        function anim() { ctx.clearRect(0,0,w,h); particles.forEach(p=>{p.update();p.draw();}); requestAnimationFrame(anim); }
+        
+        window.onload = () => { typeWriter(); init(); anim(); };
+        window.onresize = resize;
+    </script>
 </body>
 </html>
