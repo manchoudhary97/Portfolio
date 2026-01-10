@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Mann's Portfolio | AI Vision</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -26,9 +26,10 @@
             color: var(--text-light);
             overflow-x: hidden;
             line-height: 1.5;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        #ai-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.6; }
+        #ai-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.5; }
 
         /* --- Navigation --- */
         nav {
@@ -37,74 +38,121 @@
             background: rgba(5, 10, 20, 0.9); border-bottom: 1px solid rgba(0, 247, 255, 0.2);
             backdrop-filter: blur(10px);
         }
-        .logo { font-family: 'Orbitron'; font-size: 1.1rem; color: var(--neon-cyan); text-shadow: 0 0 10px var(--neon-cyan); }
+        .logo { font-family: 'Orbitron'; font-size: 1rem; color: var(--neon-cyan); text-shadow: 0 0 10px var(--neon-cyan); letter-spacing: 1px; }
 
-        .nav-links { display: flex; list-style: none; gap: 25px; }
-        .nav-links a { text-decoration: none; color: var(--text-light); font-weight: 600; font-size: 0.8rem; font-family: 'Orbitron'; transition: 0.3s; }
+        .nav-links { display: flex; list-style: none; gap: 20px; }
+        .nav-links a { text-decoration: none; color: var(--text-light); font-weight: 600; font-size: 0.75rem; font-family: 'Orbitron'; transition: 0.3s; }
         .nav-links a:hover { color: var(--neon-cyan); }
 
-        /* Mobile Menu Toggle */
-        .menu-btn { display: none; color: var(--neon-cyan); font-size: 1.5rem; cursor: pointer; }
+        .menu-btn { display: none; color: var(--neon-cyan); font-size: 1.3rem; cursor: pointer; }
+
+        /* --- Global Section Padding --- */
+        section { padding: 80px 6%; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
 
         /* --- Hero Section --- */
-        section { padding: 100px 8%; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
-        .hero h1 { font-size: 3.5rem; font-family: 'Orbitron'; line-height: 1.1; margin-bottom: 20px; }
-        
-        /* Typewriter Cursor */
+        .hero h1 { font-size: clamp(2rem, 8vw, 3.5rem); font-family: 'Orbitron'; line-height: 1.1; margin-bottom: 20px; }
         #typewriter { color: var(--neon-cyan); border-right: 3px solid var(--neon-cyan); animation: blink 0.7s infinite; }
         @keyframes blink { 50% { border-color: transparent; } }
 
-        .mono-subtitle { font-family: 'Share Tech Mono'; color: var(--neon-blue); margin-bottom: 10px; font-size: 0.9rem; }
-        .description { font-size: 1.1rem; max-width: 600px; color: var(--text-dim); }
+        .mono-subtitle { font-family: 'Share Tech Mono'; color: var(--neon-blue); margin-bottom: 10px; font-size: 0.85rem; letter-spacing: 1px; }
+        .description { font-size: 1.05rem; max-width: 600px; color: var(--text-dim); }
 
-        /* --- Cyber Card --- */
-        .cyber-card {
-            background: rgba(5, 10, 20, 0.8); border: var(--cyber-border); padding: 25px; position: relative;
-            backdrop-filter: blur(5px); box-shadow: 0 0 15px rgba(0, 247, 255, 0.1); margin-bottom: 20px;
-        }
-        .cyber-card::before { content: ''; position: absolute; top: -1px; left: -1px; width: 15px; height: 15px; border-top: 2px solid var(--neon-cyan); border-left: 2px solid var(--neon-cyan); }
-        .cyber-card::after { content: ''; position: absolute; bottom: -1px; right: -1px; width: 15px; height: 15px; border-bottom: 2px solid var(--neon-cyan); border-right: 2px solid var(--neon-cyan); }
-
-        /* --- Grid Layouts --- */
-        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .project-featured { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 30px; }
-
-        .btn {
-            padding: 12px 25px; font-family: 'Orbitron'; text-decoration: none; color: var(--neon-cyan);
-            border: 2px solid var(--neon-cyan); font-weight: bold; font-size: 0.8rem; transition: 0.4s; display: inline-block;
-        }
-        .btn:hover { background: var(--neon-cyan); color: var(--bg-dark); box-shadow: 0 0 20px var(--neon-cyan); }
+        /* --- Futuristic Buttons --- */
         .btn-group { display: flex; gap: 15px; margin-top: 30px; flex-wrap: wrap; }
+        .btn-cyber {
+            position: relative;
+            padding: 12px 24px;
+            font-family: 'Orbitron';
+            font-size: 0.7rem;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            text-decoration: none;
+            color: var(--neon-cyan);
+            border: 1px solid var(--neon-cyan);
+            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+            transition: 0.3s;
+            display: flex; align-items: center; gap: 8px;
+            background: rgba(0, 247, 255, 0.02);
+        }
+        .btn-cyber:hover { background: rgba(0, 247, 255, 0.1); transform: scale(1.05); box-shadow: 0 0 15px rgba(0, 247, 255, 0.3); }
+        .btn-blue { color: var(--neon-blue); border-color: var(--neon-blue); clip-path: polygon(0 0, 90% 0, 100% 30%, 100% 100%, 10% 100%, 0 70%); }
+        .btn-blue:hover { background: rgba(0, 102, 255, 0.1); box-shadow: 0 0 15px rgba(0, 102, 255, 0.3); }
 
-        /* --- Scroll Animations --- */
-        .hyper-hidden { opacity: 0; transform: translateY(30px); filter: blur(10px); transition: all 0.8s ease; }
+        /* --- Skills Section --- */
+        .skills-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .skill-node {
+            background: rgba(5, 10, 20, 0.7);
+            border: 1px solid rgba(0, 247, 255, 0.1);
+            padding: 25px;
+            clip-path: polygon(10% 0, 90% 0, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0 90%, 0 10%);
+            transition: 0.4s;
+        }
+        .skill-node:hover { border-color: var(--neon-cyan); transform: translateY(-5px); background: rgba(0, 247, 255, 0.05); }
+        .expertise-text { font-family: 'Share Tech Mono'; font-size: 0.8rem; color: var(--neon-cyan); padding: 8px; border-left: 2px solid var(--neon-cyan); background: rgba(0, 247, 255, 0.03); margin: 15px 0; }
+        .skill-list { list-style: none; }
+        .skill-list li { font-size: 0.95rem; color: var(--text-dim); margin-bottom: 6px; display: flex; align-items: center; }
+        .skill-list li::before { content: '▹'; color: var(--neon-cyan); margin-right: 8px; font-weight: bold; }
+
+        /* --- Projects Section --- */
+        .project-display { 
+            display: grid; 
+            grid-template-columns: 1.2fr 0.8fr; 
+            background: rgba(0, 247, 255, 0.02); 
+            border: 1px solid rgba(0, 247, 255, 0.15); 
+            overflow: hidden; border-radius: 4px; 
+        }
+        .project-info { padding: 30px; }
+        .project-visual { 
+            position: relative; background: #000; min-height: 250px; 
+            display: flex; align-items: center; justify-content: center;
+            border-left: 1px solid rgba(0, 247, 255, 0.1); 
+        }
+        .scanner-line { position: absolute; width: 100%; height: 2px; background: var(--neon-cyan); box-shadow: 0 0 10px var(--neon-cyan); top: 0; animation: scan 3s linear infinite; }
+        @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
+
+        /* --- Contact Section --- */
+        .contact-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
+        .contact-node { 
+            background: rgba(0, 247, 255, 0.03); border: 1px solid rgba(0, 247, 255, 0.1); 
+            padding: 20px 10px; text-align: center; text-decoration: none; transition: 0.3s; 
+        }
+        .contact-node i { font-size: 1.5rem; color: var(--neon-cyan); margin-bottom: 8px; display: block; }
+        .contact-node span { font-family: 'Share Tech Mono'; font-size: 0.75rem; color: var(--text-dim); }
+        .contact-node:hover { background: rgba(0, 247, 255, 0.1); border-color: var(--neon-cyan); transform: translateY(-3px); }
+
+        /* --- Footer --- */
+        .footer-status { 
+            margin-top: 50px; padding: 20px 0; border-top: 1px solid rgba(0, 247, 255, 0.1); 
+            display: flex; justify-content: space-between; align-items: center; 
+            font-family: 'Share Tech Mono'; font-size: 0.65rem; flex-wrap: wrap; gap: 10px;
+        }
+
+        /* Animations */
+        .hyper-hidden { opacity: 0; transform: translateY(20px); filter: blur(5px); transition: 0.7s ease-out; }
         .hyper-visible { opacity: 1; transform: translateY(0); filter: blur(0); }
 
-        /* =========================================
-            📱 MOBILE STYLES (Proper adjustments)
-        ========================================= */
+        /* --- Mobile Responsive Fixes --- */
         @media (max-width: 768px) {
-            nav { padding: 15px 20px; }
+            nav { padding: 10px 5%; }
             .menu-btn { display: block; }
-            
-            /* Hide Menu on Mobile initially */
             .nav-links {
-                position: fixed; top: 60px; right: -100%; width: 70%; height: 100vh;
-                background: rgba(5, 10, 20, 0.95); flex-direction: column; 
-                padding: 40px; transition: 0.4s; border-left: 1px solid var(--neon-cyan);
+                position: fixed; top: 0; right: -100%; width: 80%; height: 100vh;
+                flex-direction: column; background: rgba(5, 10, 20, 0.98);
+                padding: 80px 40px; transition: 0.4s; backdrop-filter: blur(20px);
+                border-left: 1px solid var(--neon-cyan);
             }
             .nav-links.active { right: 0; }
+            .nav-links a { font-size: 1rem; }
             
-            .hero h1 { font-size: 2.2rem; }
-            .section-title { font-size: 1.8rem !important; }
+            section { padding: 60px 5%; }
+            .hero { text-align: center; align-items: center; }
+            .btn-group { justify-content: center; }
             
-            .project-featured { grid-template-columns: 1fr; }
-            .project-img-placeholder { height: 200px; order: -1; } /* Image moves to top on mobile */
+            .project-display { grid-template-columns: 1fr; }
+            .project-visual { order: -1; min-height: 200px; border-left: 0; border-bottom: 1px solid rgba(0, 247, 255, 0.1); }
             
-            section { padding: 80px 6% 40px 6%; }
+            .footer-status { justify-content: center; text-align: center; }
         }
-
-        footer { text-align: center; padding: 30px; border-top: 1px solid rgba(0,247,255,0.1); font-family: 'Share Tech Mono'; font-size: 0.7rem; }
     </style>
 </head>
 <body>
@@ -112,7 +160,7 @@
     <canvas id="ai-canvas"></canvas>
 
     <nav>
-        <div class="logo">MANN'S PORTFOLIO</div>
+        <div class="logo">MANN_INTEL_V1.0</div>
         <div class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
         <ul class="nav-links">
             <li><a href="#home" onclick="toggleMenu()">HOME</a></li>
@@ -125,122 +173,136 @@
 
     <section class="hero" id="home">
         <div class="hyper-animate">
-            <p class="mono-subtitle">> INITIALIZING UPLINK...</p>
+            <p class="mono-subtitle">> UPLINK_ESTABLISHED_</p>
             <h1>Hi, I'm <br><span id="typewriter"></span></h1>
-            <h3 style="color: var(--neon-blue); margin-bottom: 15px; font-family: 'Orbitron'; font-size: 1rem;">CSE STUDENT | DEVELOPER</h3>
-            <p class="description">Building intelligent, modern web applications with a focus on AI integration and futuristic UI.</p>
+            <p class="description">Architecting intelligent web systems with high-end AI integration and futuristic user experiences.</p>
         </div>
         <div class="btn-group hyper-animate" style="transition-delay: 0.2s;">
-            <a href="#projects" class="btn">VIEW PROJECTS</a>
-            <a href="#contact" class="btn" style="border-color: var(--neon-blue); color: var(--neon-blue);">CONTACT</a>
+            <a href="#projects" class="btn-cyber">
+                <i class="fas fa-code-branch"></i> PROJECTS
+            </a>
+            <a href="#contact" class="btn-cyber btn-blue">
+                <i class="fas fa-bolt"></i> CONTACT
+            </a>
         </div>
     </section>
 
     <section id="about">
-        <h2 class="section-title hyper-animate" style="font-family: 'Orbitron'; margin-bottom: 40px; color: var(--neon-cyan);">[ ABOUT_ME ]</h2>
-        <div class="cyber-card hyper-animate">
-            <p style="font-size: 1rem; color: var(--text-light);">
-                I am a 1st year Computer Science B-Tech student at <strong style="color: var(--neon-cyan)">Acropolis Institute (AITR)</strong>.
+        <h2 class="mono-subtitle hyper-animate" style="font-size: 1.2rem; color: var(--neon-cyan);">[ 01. ABOUT_SYSTEM ]</h2>
+        <div class="skill-node hyper-animate" style="clip-path: none; border-radius: 4px; margin-top: 20px;">
+            <p style="color: var(--text-light); font-size: 1.1rem;">
+                I am a 1st year B-Tech student at <span style="color: var(--neon-cyan)">Acropolis (AITR)</span>, specializing in AI-driven development.
             </p>
             <br>
             <p class="description">
-                Expertise in Python, Java, and JavaScript. Passionate about AI-based web applications and continuous learning in the software development field.
+                My focus lies at the intersection of robust backend logic and immersive frontend design. Constant learning is my core process.
             </p>
         </div>
     </section>
 
     <section id="skills">
-        <h2 class="section-title hyper-animate" style="font-family: 'Orbitron'; margin-bottom: 40px; color: var(--neon-cyan);">[ SYSTEM_SKILLS ]</h2>
-        <div class="skills-grid">
-            <div class="cyber-card hyper-animate">
-                <h3 style="color: var(--neon-purple); font-size: 1rem; margin-bottom: 15px;">> LANGUAGES</h3>
-                <p class="description" style="font-size: 0.9rem;">Python, Java, JavaScript (ES6+)</p>
+        <h2 class="mono-subtitle hyper-animate" style="font-size: 1.2rem; color: var(--neon-cyan);">[ 02. SYSTEM_SKILLS ]</h2>
+        <div class="skills-container" style="margin-top: 30px;">
+            
+            <div class="skill-node hyper-animate">
+                <i class="fas fa-terminal" style="color: var(--neon-purple); font-size: 1.5rem;"></i>
+                <h3 style="font-family:'Orbitron'; margin: 10px 0; font-size: 1rem;">LANGUAGES</h3>
+                <div class="expertise-text">LOG: Deep expertise in AI-friendly scripting.</div>
+                <ul class="skill-list">
+                    <li>Python (Expert ML)</li>
+                    <li>Java (OOP Core)</li>
+                    <li>JS (Dynamic Logic)</li>
+                </ul>
             </div>
-            <div class="cyber-card hyper-animate" style="transition-delay: 0.2s;">
-                <h3 style="color: var(--neon-blue); font-size: 1rem; margin-bottom: 15px;">> WEB CORE</h3>
-                <p class="description" style="font-size: 0.9rem;">HTML5, CSS3 (Flex/Grid), Responsive Design</p>
+
+            <div class="skill-node hyper-animate" style="transition-delay: 0.1s;">
+                <i class="fas fa-code" style="color: var(--neon-blue); font-size: 1.5rem;"></i>
+                <h3 style="font-family:'Orbitron'; margin: 10px 0; font-size: 1rem;">WEB INTERFACE</h3>
+                <div class="expertise-text">LOG: Building responsive high-end UI/UX.</div>
+                <ul class="skill-list">
+                    <li>HTML5 / CSS3</li>
+                    <li>Modern Flex & Grid</li>
+                    <li>Interactive Anims</li>
+                </ul>
             </div>
-            <div class="cyber-card hyper-animate" style="transition-delay: 0.4s;">
-                <h3 style="color: var(--neon-cyan); font-size: 1rem; margin-bottom: 15px;">> TOOLS</h3>
-                <p class="description" style="font-size: 0.9rem;">Git, GitHub, VS Code, API Integration</p>
+
+            <div class="skill-node hyper-animate" style="transition-delay: 0.2s;">
+                <i class="fas fa-microchip" style="color: var(--neon-cyan); font-size: 1.5rem;"></i>
+                <h3 style="font-family:'Orbitron'; margin: 10px 0; font-size: 1rem;">DEV TOOLS</h3>
+                <div class="expertise-text">LOG: Version control and API integration.</div>
+                <ul class="skill-list">
+                    <li>Git & GitHub</li>
+                    <li>REST API Systems</li>
+                    <li>VS Code Environment</li>
+                </ul>
             </div>
+
         </div>
     </section>
 
     <section id="projects">
-        <h2 class="section-title hyper-animate" style="font-family: 'Orbitron'; margin-bottom: 40px; color: var(--neon-cyan);">[ DEPLOYED_WORK ]</h2>
-        <div class="cyber-card project-featured hyper-animate">
-            <div>
-                <p class="mono-subtitle">FEATURED_PROJECT</p>
-                <h3 style="font-family:'Orbitron'; margin: 10px 0;">AI Photo Enhancer</h3>
-                <p class="description" style="font-size: 0.9rem;">Using AI APIs to upscale and improve image quality directly in the browser.</p>
-                <div class="btn-group">
-                    <a href="#" class="btn" style="padding: 8px 15px;">DEMO</a>
+        <h2 class="mono-subtitle hyper-animate" style="font-size: 1.2rem; color: var(--neon-cyan);">[ 03. DEPLOYED_WORK ]</h2>
+        <div class="project-display hyper-animate" style="margin-top: 30px;">
+            <div class="project-info">
+                <div style="display:flex; gap:10px; margin-bottom:10px;">
+                    <span style="font-size:0.6rem; border:1px solid var(--neon-cyan); padding:2px 6px; color:var(--neon-cyan);">AI</span>
+                    <span style="font-size:0.6rem; border:1px solid var(--neon-blue); padding:2px 6px; color:var(--neon-blue);">PYTHON</span>
                 </div>
+                <h3 style="font-family:'Orbitron'; margin-bottom:15px;">AI Photo Enhancer</h3>
+                <p class="description" style="font-size:0.9rem; margin-bottom:20px;">
+                    Integrated neural networks for real-time image upscaling and noise reduction. Optimized for browser performance.
+                </p>
+                <a href="#" class="btn-cyber" style="width: fit-content; padding: 8px 16px;">RUN_DEMO</a>
             </div>
-            <div style="background: rgba(0,247,255,0.05); border: 1px dashed var(--neon-cyan); display: flex; align-items: center; justify-content: center; min-height: 150px;">
-                <i class="fas fa-brain fa-3x" style="color: var(--neon-cyan);"></i>
+            <div class="project-visual">
+                <div class="scanner-line"></div>
+                <i class="fas fa-brain" style="font-size: 4rem; color: var(--neon-cyan); opacity: 0.5;"></i>
             </div>
         </div>
     </section>
 
-    <footer id="contact">
-        <p class="mono-subtitle">ESTABLISH_UPLINK</p>
-        <div style="margin: 20px 0;">
-            <a href="mailto:mrmanchoudhari@gmail.com" style="color: var(--neon-cyan); margin: 0 10px;"><i class="fas fa-envelope"></i></a>
-            <a href="#" style="color: var(--neon-cyan); margin: 0 10px;"><i class="fab fa-linkedin"></i></a>
-            <a href="#" style="color: var(--neon-cyan); margin: 0 10px;"><i class="fab fa-github"></i></a>
+    <section id="contact" style="min-height: auto; padding-bottom: 50px;">
+        <h2 class="mono-subtitle hyper-animate" style="font-size: 1.2rem; color: var(--neon-cyan);">[ 04. ESTABLISH_UPLINK ]</h2>
+        <div class="contact-container hyper-animate" style="margin-top: 30px;">
+            <a href="mailto:mrmanchoudhari@gmail.com" class="contact-node"><i class="fas fa-envelope"></i><span>EMAIL</span></a>
+            <a href="#" class="contact-node"><i class="fab fa-linkedin-in"></i><span>LINKEDIN</span></a>
+            <a href="#" class="contact-node"><i class="fab fa-github"></i><span>GITHUB</span></a>
+            <a href="#" class="contact-node"><i class="fab fa-instagram"></i><span>INSTA</span></a>
+            <a href="#" class="contact-node"><i class="fab fa-youtube"></i><span>YOUTUBE</span></a>
         </div>
-        <p>© 2026 MAN CHOUDHARY // STATUS: ACTIVE</p>
-    </footer>
+        
+        <div class="footer-status hyper-animate">
+            <div><span style="height:6px; width:6px; background:#00ff88; border-radius:50%; display:inline-block; margin-right:5px; box-shadow: 0 0 5px #00ff88;"></span> SYSTEM_ONLINE</div>
+            <div>© 2026 MAN CHOUDHARY | V1.0.2</div>
+            <div style="color: var(--neon-cyan);"><span id="clock">00:00:00</span></div>
+        </div>
+    </section>
 
     <script>
-        // --- Navigation Toggle ---
-        function toggleMenu() {
-            const links = document.querySelector('.nav-links');
-            links.classList.toggle('active');
-        }
+        function updateClock() { document.getElementById('clock').innerText = new Date().toLocaleTimeString(); }
+        setInterval(updateClock, 1000); updateClock();
 
-        // --- Typewriter Effect ---
-        const text = "Man Choudhary";
-        let i = 0;
-        function typeWriter() {
-            if (i < text.length) {
-                document.getElementById("typewriter").innerHTML += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, 150);
-            }
-        }
+        function toggleMenu() { document.querySelector('.nav-links').classList.toggle('active'); }
 
-        // --- Intersection Observer for Scroll Animations ---
+        const text = "Man Choudhary"; let i = 0;
+        function typeWriter() { if (i < text.length) { document.getElementById("typewriter").innerHTML += text.charAt(i); i++; setTimeout(typeWriter, 150); } }
+
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('hyper-visible');
-                }
-            });
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('hyper-visible'); });
         }, { threshold: 0.1 });
+        document.querySelectorAll('.hyper-animate').forEach(el => { el.classList.add('hyper-hidden'); observer.observe(el); });
 
-        document.querySelectorAll('.hyper-animate').forEach(el => {
-            el.classList.add('hyper-hidden');
-            observer.observe(el);
-        });
-
-        // --- Particle Background ---
-        const canvas = document.getElementById('ai-canvas');
-        const ctx = canvas.getContext('2d');
+        const canvas = document.getElementById('ai-canvas'); const ctx = canvas.getContext('2d');
         let w, h, particles = [];
         function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
         class P {
             constructor() { this.x = Math.random()*w; this.y = Math.random()*h; this.vx = Math.random()*1-0.5; this.vy = Math.random()*1-0.5; }
             update() { this.x+=this.vx; this.y+=this.vy; if(this.x<0||this.x>w)this.vx*=-1; if(this.y<0||this.y>h)this.vy*=-1; }
-            draw() { ctx.fillStyle='rgba(0,247,255,0.5)'; ctx.beginPath(); ctx.arc(this.x,this.y,1,0,Math.PI*2); ctx.fill(); }
+            draw() { ctx.fillStyle='rgba(0,247,255,0.4)'; ctx.beginPath(); ctx.arc(this.x,this.y,0.8,0,Math.PI*2); ctx.fill(); }
         }
-        function init() { resize(); for(let i=0; i<60; i++) particles.push(new P()); }
+        function init() { resize(); particles = []; for(let i=0; i<50; i++) particles.push(new P()); }
         function anim() { ctx.clearRect(0,0,w,h); particles.forEach(p=>{p.update();p.draw();}); requestAnimationFrame(anim); }
-        
-        window.onload = () => { typeWriter(); init(); anim(); };
-        window.onresize = resize;
+        window.onload = () => { typeWriter(); init(); anim(); }; window.onresize = resize;
     </script>
 </body>
 </html>
