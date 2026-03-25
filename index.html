@@ -305,4 +305,243 @@
         window.onload = () => { typeWriter(); init(); anim(); }; window.onresize = resize;
     </script>
 </body>
+</html> <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Cursor</title>
+
+<style>
+:root {
+    --bg-dark: #020b10;
+    --neon: #00f7ff;
+}
+
+body {
+    margin:0;
+    cursor:none;
+    background:var(--bg-dark);
+    overflow-x:hidden; /* FIXED */
+}
+
+/* ===== DOT ===== */
+.cursor-dot {
+    position:fixed;
+    width:12px;
+    height:12px;
+    background:var(--neon);
+    border-radius:50%;
+    pointer-events:none;
+    z-index:9999;
+    transform:translate(-50%,-50%);
+    box-shadow:0 0 10px var(--neon),0 0 20px var(--neon);
+}
+
+/* ===== RING ===== */
+.cursor-ring {
+    position:fixed;
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    border:1px solid rgba(0,247,255,0.4);
+    pointer-events:none;
+    z-index:9998;
+    transform:translate(-50%,-50%);
+    transition:0.2s;
+}
+
+/* ===== GLOW ===== */
+.cursor-glow {
+    position:fixed;
+    width:100px;
+    height:100px;
+    background:radial-gradient(circle, rgba(0,247,255,0.2), transparent 70%);
+    border-radius:50%;
+    pointer-events:none;
+    z-index:9997;
+    transform:translate(-50%,-50%);
+}
+
+/* ===== TRAIL ===== */
+.trail {
+    position:fixed;
+    width:6px;
+    height:6px;
+    background:var(--neon);
+    border-radius:50%;
+    pointer-events:none;
+    opacity:0.5;
+    z-index:9996;
+    animation:fade 0.6s linear forwards;
+}
+
+@keyframes fade {
+    to {
+        opacity:0;
+        transform:scale(0.3);
+    }
+}
+
+/* ===== SHAKE ===== */
+body.shake {
+    animation: shake 0.2s;
+}
+
+@keyframes shake {
+    0% { transform: translate(0,0); }
+    25% { transform: translate(2px,-2px); }
+    50% { transform: translate(-2px,2px); }
+    75% { transform: translate(2px,2px); }
+    100% { transform: translate(0,0); }
+}
+
+/* ===== SHOCKWAVE ===== */
+.shockwave {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #00f7ff;
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    animation: wave 0.6s ease-out forwards;
+    z-index: 9995;
+}
+
+@keyframes wave {
+    to {
+        width: 200px;
+        height: 200px;
+        opacity: 0;
+    }
+}
+
+/* ===== PARTICLES ===== */
+.particle {
+    position: fixed;
+    width: 4px;
+    height: 4px;
+    background: #00f7ff;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9994;
+}
+
+/* ===== DEMO SCROLL CONTENT (REMOVE LATER) ===== */
+.section {
+    height:100vh;
+}
+</style>
+</head>
+
+<body>
+
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+<div class="cursor-glow"></div>
+
+<!-- Demo scroll content -->
+<div class="section"></div>
+<div class="section"></div>
+<div class="section"></div>
+
+<script>
+const dot = document.querySelector('.cursor-dot');
+const ring = document.querySelector('.cursor-ring');
+const glow = document.querySelector('.cursor-glow');
+
+let mouse = {x:window.innerWidth/2,y:window.innerHeight/2};
+let pos = {...mouse};
+let glowPos = {...mouse};
+
+/* ===== MOUSE MOVE ===== */
+document.addEventListener('mousemove', e=>{
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+
+    dot.style.left = mouse.x+'px';
+    dot.style.top = mouse.y+'px';
+
+    createTrail(mouse.x, mouse.y);
+});
+
+/* ===== SMOOTH FOLLOW ===== */
+function animate(){
+    pos.x += (mouse.x - pos.x)*0.18;
+    pos.y += (mouse.y - pos.y)*0.18;
+
+    glowPos.x += (mouse.x - glowPos.x)*0.08;
+    glowPos.y += (mouse.y - glowPos.y)*0.08;
+
+    ring.style.left = pos.x+'px';
+    ring.style.top = pos.y+'px';
+
+    glow.style.left = glowPos.x+'px';
+    glow.style.top = glowPos.y+'px';
+
+    requestAnimationFrame(animate);
+}
+animate();
+
+/* ===== TRAIL ===== */
+function createTrail(x,y){
+    let trail = document.createElement('div');
+    trail.className = 'trail';
+    trail.style.left = x+'px';
+    trail.style.top = y+'px';
+    document.body.appendChild(trail);
+
+    setTimeout(()=>trail.remove(),600);
+}
+
+/* ===== CLICK EFFECT ===== */
+document.addEventListener('click', (e)=>{
+
+    document.body.classList.add('shake');
+    setTimeout(()=>document.body.classList.remove('shake'),200);
+
+    let wave = document.createElement('div');
+    wave.className = 'shockwave';
+    wave.style.left = e.clientX + 'px';
+    wave.style.top = e.clientY + 'px';
+    document.body.appendChild(wave);
+    setTimeout(()=>wave.remove(),600);
+
+    for(let i=0;i<12;i++){
+        let p = document.createElement('div');
+        p.className = 'particle';
+        p.style.left = e.clientX+'px';
+        p.style.top = e.clientY+'px';
+
+        document.body.appendChild(p);
+
+        let angle = Math.random()*2*Math.PI;
+        let dist = Math.random()*80;
+
+        let x = Math.cos(angle)*dist;
+        let y = Math.sin(angle)*dist;
+
+        p.animate([
+            {transform:'translate(0,0)',opacity:1},
+            {transform:`translate(${x}px,${y}px)`,opacity:0}
+        ],{
+            duration:600,
+            easing:'ease-out'
+        });
+
+        setTimeout(()=>p.remove(),600);
+    }
+
+    ring.style.transform = "translate(-50%,-50%) scale(0.6)";
+    glow.style.transform = "translate(-50%,-50%) scale(2)";
+
+    setTimeout(()=>{
+        ring.style.transform = "translate(-50%,-50%) scale(1)";
+        glow.style.transform = "translate(-50%,-50%) scale(1)";
+    },150);
+});
+</script>
+
+</body>
 </html>
