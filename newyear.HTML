@@ -1,0 +1,226 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #ff6a88, #ff99ac);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 150, 170, 0.2);
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(20px);
+  padding: 35px;
+  border-radius: 30px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+  animation: fadeIn 1s ease, heartbeat 3s infinite;
+}
+
+.hidden { display: none; }
+
+h1, h2, h3 {
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255,255,255,0.8),
+               0 0 20px rgba(255,105,135,0.7);
+}
+
+h1 {
+  font-family: 'Pacifico', cursive;
+  font-size: 34px;
+}
+
+/* animations */
+@keyframes heartbeat {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+button {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 30px;
+  background: linear-gradient(45deg, #ff4d6d, #ff6a88);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: 0.3s;
+  box-shadow: 0 5px 20px rgba(255,77,109,0.5);
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+input {
+  padding: 12px;
+  border-radius: 20px;
+  border: none;
+  margin-top: 10px;
+  text-align: center;
+  outline: none;
+}
+
+#typing {
+  font-size: 20px;
+  min-height: 60px;
+  color: #fff;
+}
+
+/* floating hearts */
+.heart {
+  position: absolute;
+  color: rgba(255,255,255,0.7);
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(100vh) scale(0.5); }
+  100% { transform: translateY(-10vh) scale(1.2); }
+}
+
+/* 💖 LOVE IMAGE */
+.love-img {
+  margin-top: 20px;
+  width: 220px;
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(255,255,255,0.8);
+  animation: floatLove 4s ease-in-out infinite, glow 2s infinite alternate;
+}
+
+@keyframes floatLove {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes glow {
+  from { box-shadow: 0 0 15px #fff; }
+  to { box-shadow: 0 0 35px #ff4d6d; }
+}
+</style>
+</head>
+
+<body>
+
+<script>
+for(let i=0;i<25;i++){
+  let h=document.createElement('div');
+  h.innerHTML='💖';
+  h.className='heart';
+  h.style.left=Math.random()*100+'%';
+  h.style.fontSize=(Math.random()*20+10)+'px';
+  h.style.animationDuration=(Math.random()*5+5)+'s';
+  document.body.appendChild(h);
+}
+</script>
+
+<div class="container" id="page1">
+  <h1>Hey dear cutie Esha.. 💖</h1>
+  <h2>I have something special for you...</h2>
+  <button onclick="nextPage(2)">Next</button>
+</div>
+
+<div class="container hidden" id="page2">
+  <h2 id="typing"></h2>
+  <button onclick="nextPage(3)">Continue</button>
+</div>
+
+<div class="container hidden" id="page3">
+  <h2>Enter our special date 💌</h2>
+  <input type="password" id="password" placeholder="DDMMYYYY">
+  <br>
+  <button onclick="checkPassword()">Unlock</button>
+  <p id="error" style="color:white;"></p>
+</div>
+
+<div class="container hidden" id="page4">
+  <h2>We are together since 💖</h2>
+  <h1 id="countup"></h1>
+
+  <!-- 💖 IMAGE -->
+  <img src="/love.jpg.jpeg" class="love-img">
+</div>
+
+<script>
+function nextPage(page) {
+  document.querySelectorAll('.container').forEach(el => el.classList.add('hidden'));
+  document.getElementById('page' + page).classList.remove('hidden');
+}
+
+// typing
+const text = "You are the most special person in my life... I love you so much ❤️";
+let i = 0;
+function typeWriter() {
+  if (i < text.length) {
+    document.getElementById("typing").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typeWriter, 40);
+  }
+}
+window.onload = typeWriter;
+
+// password
+function checkPassword() {
+  const pass = document.getElementById('password').value;
+  if (pass === "24022007") {
+    nextPage(4);
+    startCountUp();
+  } else {
+    document.getElementById('error').innerText = "Wrong password 😢";
+  }
+}
+
+// count up
+function startCountUp() {
+  const startDate = new Date("2023-02-24T00:00:00");
+
+  setInterval(() => {
+    const now = new Date();
+    const diff = now - startDate;
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const mins = Math.floor((diff / (1000 * 60)) % 60);
+    const secs = Math.floor((diff / 1000) % 60);
+
+    document.getElementById("countup").innerText =
+      `${days}d ${hours}h ${mins}m ${secs}s`;
+  }, 1000);
+}
+</script>
+
+</body>
+</html>
+
