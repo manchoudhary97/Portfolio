@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For You ❤️</title>
+<title>Esha this is For You ❤️</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Pacifico&display=swap" rel="stylesheet">
 
@@ -19,6 +18,7 @@ body {
   align-items: center;
   overflow: hidden;
   position: relative;
+  touch-action: manipulation;
 }
 
 body::before {
@@ -129,6 +129,55 @@ input {
   from { box-shadow: 0 0 15px #fff; }
   to { box-shadow: 0 0 35px #ff4d6d; }
 }
+
+/* 💥 HEART BLAST */
+.blast-heart {
+  position: absolute;
+  font-size: 20px;
+  animation: blast 1s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes blast {
+  0% { transform: scale(0.5); opacity: 1; }
+  100% { transform: translate(var(--x), var(--y)) scale(1.5); opacity: 0; }
+}
+
+/* 💥 FIREWORK */
+.spark {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: white;
+  animation: sparkAnim 0.8s linear forwards;
+}
+
+@keyframes sparkAnim {
+  0% { opacity: 1; }
+  100% { transform: translate(var(--x), var(--y)); opacity: 0; }
+}
+
+
+/* ✨ SPARKLE */
+.sparkle {
+  position: absolute;
+  font-size: 12px;
+  animation: sparkleAnim 1.5s linear forwards;
+}
+
+@keyframes sparkleAnim {
+  0% { opacity: 1; }
+  100% { opacity: 0; transform: scale(2); }
+}
+
+/* 📱 RESPONSIVE */
+@media (max-width: 600px) {
+  .container { width: 90%; padding: 20px; }
+  h1 { font-size: 24px; }
+  h2 { font-size: 18px; }
+  .love-img { width: 160px; }
+}
 </style>
 </head>
 
@@ -159,7 +208,7 @@ for(let i=0;i<25;i++){
 
 <div class="container hidden" id="page3">
   <h2>Sweetheart please enter password for special 💌</h2>
-  <input type="password" id="password" placeholder="guess the password 😉">
+  <input type="password" id="password" placeholder="password">
   <br>
   <button onclick="checkPassword()">Unlock</button>
   <p id="error" style="color:white;"></p>
@@ -170,8 +219,7 @@ for(let i=0;i<25;i++){
   <h1 id="countup"></h1>
   <h1><a>And will last a lifetime!</a></h1>
    
-  <!-- 💖 IMAGE -->
-  <img src="love.jpg" class="love-img">
+  <img src="love.jpg" class="love-img" onclick="heartBlast(event)">
   <h2>LOVEEE YOUU..💗</h2>
 </div>
 
@@ -181,7 +229,6 @@ function nextPage(page) {
   document.getElementById('page' + page).classList.remove('hidden');
 }
 
-// typing
 const text = "You are the most special person in my life... I love you so much ❤️";
 let i = 0;
 function typeWriter() {
@@ -193,7 +240,6 @@ function typeWriter() {
 }
 window.onload = typeWriter;
 
-// password
 function checkPassword() {
   const pass = document.getElementById('password').value;
   if (pass === "24022007") {
@@ -204,25 +250,88 @@ function checkPassword() {
   }
 }
 
-// count up
 function startCountUp() {
   const startDate = new Date("2022-02-24T00:00:00");
-
   setInterval(() => {
     const now = new Date();
     const diff = now - startDate;
-
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
     const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
     const mins = Math.floor((diff / (1000 * 60)) % 60);
     const secs = Math.floor((diff / 1000) % 60);
-
     document.getElementById("countup").innerText =
       `${days}d ${hours}h ${mins}m ${secs}s`;
   }, 1000);
 }
+
+/* 💥 ALL EXTRA EFFECTS */
+function heartBlast(e) {
+  const rect = e.target.getBoundingClientRect();
+  const x = rect.left + rect.width / 2;
+  const y = rect.top + rect.height / 2;
+
+  for (let i = 0; i < 20; i++) {
+    let heart = document.createElement("div");
+    heart.className = "blast-heart";
+    heart.innerHTML = "💖";
+
+    let angle = Math.random() * 2 * Math.PI;
+    let radius = Math.random() * 150;
+
+    heart.style.setProperty("--x", Math.cos(angle) * radius + "px");
+    heart.style.setProperty("--y", Math.sin(angle) * radius + "px");
+
+    heart.style.left = x + "px";
+    heart.style.top = y + "px";
+
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 1000);
+  }
+
+  for (let i = 0; i < 25; i++) {
+    let spark = document.createElement("div");
+    spark.className = "spark";
+
+    let angle = Math.random() * 2 * Math.PI;
+    let radius = Math.random() * 120;
+
+    spark.style.setProperty("--x", Math.cos(angle) * radius + "px");
+    spark.style.setProperty("--y", Math.sin(angle) * radius + "px");
+
+    spark.style.left = x + "px";
+    spark.style.top = y + "px";
+
+    document.body.appendChild(spark);
+    setTimeout(() => spark.remove(), 800);
+  }
+
+  if (navigator.vibrate) navigator.vibrate([100,50,100]);
+
+  let audio = new Audio("https://www.fesliyanstudios.com/play-mp3/387");
+  audio.volume = 0.3;
+  audio.play();
+}
+
+
+// ✨ SPARKLE
+document.addEventListener("click",(e)=>{
+  for(let i=0;i<8;i++){
+    let s=document.createElement("div");
+    s.className="sparkle";
+    s.innerHTML="✨";
+    s.style.left=e.clientX+"px";
+    s.style.top=e.clientY+"px";
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(),1500);
+  }
+});
+
+// 🎵 MUSIC
+let music=new Audio("idila.piano.mp3");
+music.loop=true;
+music.volume=0.2;
+document.addEventListener("click",()=>{music.play();},{once:true});
 </script>
 
 </body>
 </html>
-
